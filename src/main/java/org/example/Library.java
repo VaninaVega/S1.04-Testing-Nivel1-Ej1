@@ -1,71 +1,51 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Library {
 
-    private ArrayList<String> books;
+    private ArrayList<Book> books = new ArrayList<>();
 
-    public ArrayList<String> getBooks() {
+    public List<Book> getBooks() {
         return books;
     }
 
-    public void setBooks(ArrayList<String> books) {
-        this.books = books;
-    }
-
-    public Library() {
-        this.books = new ArrayList<>();
-
-    }
-
-    public void addBook(String title2) {
-        boolean exists = false;
-        for (String book : books) {
-            if (book.equalsIgnoreCase(title2)) {
-                exists = true;
+    public boolean addBook(Book book) {
+        for (Book b : books) {
+            if (b.getTitle().equalsIgnoreCase(book.getTitle())) {
+                return false;  // El libro ya existe, no se añade.
             }
         }
-        if (exists == false) {
-            books.add(title2);
-            System.out.println("Book added: " + title2);
-        } else {
-            System.out.println("Book already exist");
-        }
+        books.add(book);
+        return true;  // Se añade porque no hay duplicados.
     }
 
-    public String getAllBooks() {
-        String response = "";
-        //for (String book:books) {
-        for (int i = 0; i < books.size(); i++) {
-            if (i == 0) {
-                response = response + books.get(i);
-            } else {
-                response = response + ", " + books.get(i);
-            }
-        }
-            return response;
-        }
 
-        public String getBookByPosition (int position){
-            if (position >= 0 && position < books.size()) {
-                return books.get(position);
-            } else {
-                return "Not valid position";
-            }
+    public List<String> getAllBookTitles() {
+        List<String> titles = new ArrayList<>();
+        for (Book book : books) {
+            titles.add(book.getTitle());
         }
-
-        public void addBookByPosition ( int position, String title){
-            if (position >= 0 && position < books.size()) {
-                books.add(position, title);
-                System.out.println("The book " + title + " has been added to library in position: " + position + ".");
-            } else {
-                System.out.println("Invalid position. Book can not be added");
-            }
-        }
-
-        public void deleteBookByTitle (String title){
-            books.remove(title);
-            System.out.println("Book title " + title + ", has been removed.");
-        }
+        return titles;
     }
+
+    public Book getBookByPosition(int position) {
+        if (position >= 0 && position < books.size()) {
+            return books.get(position);
+        }
+        throw new IndexOutOfBoundsException("Position out of range.");
+    }
+
+    public boolean addBookByPosition(int position, Book book) {
+        if (position >= 0 && position <= books.size() && !books.contains(book)) {
+            books.add(position, book);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean deleteBookByTitle(String title) {
+        return books.removeIf(book -> book.getTitle().equalsIgnoreCase(title));
+    }
+}

@@ -1,6 +1,6 @@
 # S1.04-Testing-Nivel1-Ej1
 
-#Summary: exercise description
+## Summary: exercise description
 
 Create a Java class that manages a collection of books in a library. The class should allow adding books, retrieving the list of books, getting a specific book by its position, adding a book at a specific position, and removing a book by title.
 
@@ -25,7 +25,7 @@ They verify that the list remains alphabetically sorted after adding or removing
 
 java 22
 
-#Requirements
+## Requirements
 
 Programming language: Java 22
 
@@ -49,7 +49,7 @@ Include in your `pom.xml` file:
 ```
 If you don't use Maven, download the JAR file from Maven Central and manually add it to the project.
 
-#How to run it
+## How to run it
 
 1. **Clone or download the repository**:
 - Clone the repository:
@@ -75,7 +75,7 @@ mvn test
 4. **View the results**:
 - The test results will appear in the IDE console or the terminal, indicating which tests passed and which failed.
 
-#Contribution
+## Contribution
 
 Contributions are welcome! Please follow these steps to contribute:
 
